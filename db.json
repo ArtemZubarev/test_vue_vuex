@@ -1,0 +1,50 @@
+{
+  "parcels": {
+    "data": [
+      {
+        "key": 2034,
+        "code": "LV09010-VR",
+        "from": "Kirov S1",
+        "to": "Moscow SV47",
+        "location": "Tula SK1",
+        "status": "handed",
+        "important": "low",
+        "sender": "Бойдашов В.Н."
+      },
+      {
+        "key": 2035,
+        "code": "LV09011-VR",
+        "from": "Tula S1",
+        "to": "Moscow UV15",
+        "location": "Moscow SK1",
+        "status": "in_transit",
+        "important": "tall",
+        "sender": "Кочетков А.В."
+      },
+      {
+        "key": 2048,
+        "code": "LP01001-ML",
+        "from": "Kirov S12",
+        "to": "Saint-Petersburg UV1",
+        "location": "Moscow SK1",
+        "status": "handed",
+        "important": "tall",
+        "sender": "Зубарев А.В."
+      }
+    ],
+    "meta": {
+      "pagination": {
+        "total": 2350,
+        "total_pages": 231,
+        "current_page": 1
+      }
+    }
+  },
+  "user": {
+    "data":{
+      "avatar":"http://fillmurray.com/71/71",
+      "email":"alenab@logisticpro.online",
+      "name":"Alena Bolsheva"
+    }
+  }
+}
