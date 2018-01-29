@@ -28,11 +28,20 @@
     stroke-width: 0
     stroke: currentColor
     fill: currentColor
+  .slide-enter
+    opacity: 0
+    transform: translateY(-100px)
+  .slide-leave-to
+    opacity: 1
+    transform: translateY(0px)
 </style>
 
 <template>
   <div id="app">
-    <main-header/>
+    <transition name="slide" appear>
+      <main-header/>
+    </transition>
+
     <section class="content">
       <router-view/>
     </section>

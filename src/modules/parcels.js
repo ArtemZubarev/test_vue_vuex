@@ -11,7 +11,8 @@ const parcelsModule = {
     data: [],
     filteredData: [],
     searchPhrase: '',
-    selectAll: false
+    selectAll: false,
+    checkedCount: null
   },
   getters: {
     parcelsList (state) {
@@ -22,11 +23,15 @@ const parcelsModule = {
     },
     filteredList (state) {
       return state.filteredData
+    },
+    checkedCount (state) {
+      return state.checkedCount
     }
   },
   mutations: {
     CLEAR_PARCELS_LIST (state, parcelsList) {
       state.data = []
+      state.filteredData = []
     },
     GET_PARCELS (state, parcelsList) {
       state.data = R.concat(state.data, parcelsList)
@@ -35,19 +40,23 @@ const parcelsModule = {
       state.selectAll = !state.selectAll
       if (state.searchPhrase === '' && state.selectAll) {
         state.data.forEach(function (item) {
+          state.checkedCount = state.data.length
           item.props.checked = true
         })
       } else if (state.searchPhrase === '' && !state.selectAll) {
         state.data.forEach(function (item) {
+          state.checkedCount = 0
           item.props.checked = false
         })
       } else if (state.searchPhrase !== '' && state.selectAll) {
         state.filteredData.forEach(function (item) {
+          state.checkedCount = state.filteredData.length
           item.props.checked = true
         })
       } else {
         console.log(state.filteredData)
         state.filteredData.forEach(function (item) {
+          state.checkedCount = 0
           item.props.checked = false
         })
       }
@@ -64,10 +73,18 @@ const parcelsModule = {
           R.contains(state.searchPhrase, item.to.toLowerCase()) === true
         state.filteredData = R.filter(bySender, state.data)
       }
+    },
+    CHANGE_CHECKED_COUNTER (state, value) {
+      if (value) {
+        state.checkedCount++
+      } else {
+        state.checkedCount--
+      }
     }
   },
   actions: {
     getParcels ({commit}) {
+      console.log(123)
       Vue.http.get('parcels').then(
         (response) => {
           let parcels = response.body.data

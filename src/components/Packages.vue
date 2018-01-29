@@ -118,9 +118,22 @@
       input
         position: absolute
         visibility: hidden
+        &:active
+          & ~ label:after
+            top: 10px
+            right: 10px
+            bottom: 10px
+            left: 10px
+            background: #2196f3
         &:checked
           & ~ label:after
             background: #2196f3
+  .slide-side-enter
+    opacity: 0
+    transform: translateX(-100px)
+  .slide-side-leave-to
+    opacity: 1
+    transform: translateX(0px)
 </style>
 
 <template>
@@ -136,7 +149,8 @@
         <li class="list-item__col"></li>
       </ul>
       <div class="packages__list">
-        <ul class="packages__item package list-item" v-for="parcel in parcels" :key="parcel.key">
+        <transition-group name="slide-side" appear>
+          <ul class="packages__item package list-item" v-for="parcel in parcels" :key="parcel.key">
           <li class="package__code list-item__col">{{parcel.code}}</li>
           <li class="package__direction list-item__col">
             <span>{{parcel.from}}</span>
@@ -158,12 +172,13 @@
           <li class="package__sender list-item__col">
             <span>{{parcel.sender}}</span>
             <span class="package__check">
-              <input :id="'package_check_' + parcel.key" type="checkbox" v-model="parcel.props.checked">
+              <input :id="'package_check_' + parcel.key" type="checkbox" v-model="parcel.props.checked" @change="changeCheckedCount(parcel.props.checked)">
               <label :for="'package_check_' + parcel.key"></label>
             </span>
           </li>
 
         </ul>
+        </transition-group>
       </div>
     </div>
   </section>
@@ -182,8 +197,15 @@ export default {
     }
   },
   mounted: function () {
-    this.$store.commit('CLEAR_PARCELS_LIST')
-    this.$store.dispatch('getParcels')
+    if (this.$store.getters.parcelsList.length === 0) {
+      this.$store.commit('CLEAR_PARCELS_LIST')
+      this.$store.dispatch('getParcels')
+    }
+  },
+  methods: {
+    changeCheckedCount: function (status) {
+      this.$store.commit('CHANGE_CHECKED_COUNTER', status)
+    }
   }
 }
 </script>

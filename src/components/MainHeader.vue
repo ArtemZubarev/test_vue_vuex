@@ -3,6 +3,7 @@
     background: #1194f6
     box-shadow: 0 0 20px rgba(19, 18, 18, 0.3)
     z-index: 1
+    transition: 0.2s
     &__container
       padding-top: 43px
     &__perform
@@ -30,6 +31,7 @@
         border-radius: 3px
         background-color: #42a5f5
         color: #fff
+        font-size: 21px
         transition: 0.3s
         &::placeholder
           color: #d6e9f9
@@ -42,7 +44,6 @@
         top: 0
         right: 0
         border: none
-        cursor: pointer
         background: url("../assets/fa-search.png") no-repeat
         background-position: center center
     &__nav
@@ -105,6 +106,7 @@
       height: 71px
       border-radius: 36px
       overflow: hidden
+
 </style>
 
 <template>
@@ -117,14 +119,13 @@
           </div>
           <div class="header__search">
             <input type="text" placeholder="Поиск посылок" v-model="searchPhrase">
-            <button class="header__search-btn"></button>
+            <span class="header__search-btn"></span>
           </div>
           <div class="header__account account">
             <div class="account__avatar">
               <img :src="user.avatar" alt="">
             </div>
           </div>
-
         </div>
         <nav class="header__nav">
           <ul class="nav">
@@ -137,11 +138,8 @@
           </div>
         </nav>
       </div>
-
     </div>
-
   </header>
-
 </template>
 
 <script>

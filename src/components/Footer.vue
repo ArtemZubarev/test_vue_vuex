@@ -23,9 +23,20 @@
   <footer class="footer">
     <div class="wrapper">
       <div class="footer__container">
-        <span class="footer__counts-checked">Выбран элемент</span>
+        <span class="footer__counts-checked">Выбран {{checkedCount}} элемент</span>
         <span class="footer__something"></span>
       </div>
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  name: 'main-footer',
+  computed: {
+    checkedCount () {
+      return this.$store.getters.checkedCount
+    }
+  }
+}
+</script>
