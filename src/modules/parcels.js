@@ -54,7 +54,6 @@ const parcelsModule = {
           item.props.checked = true
         })
       } else {
-        console.log(state.filteredData)
         state.filteredData.forEach(function (item) {
           state.checkedCount = 0
           item.props.checked = false
@@ -84,7 +83,6 @@ const parcelsModule = {
   },
   actions: {
     getParcels ({commit}) {
-      console.log(123)
       Vue.http.get('parcels').then(
         (response) => {
           let parcels = response.body.data
